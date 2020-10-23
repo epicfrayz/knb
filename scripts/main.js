@@ -146,7 +146,6 @@ function resultGame() {
 		dataGame.state.over = dataGame.state.over  +1;
 	}
 
-
 	setTimeout(function (){
 		levelClear();
 		loadLevel();
@@ -182,7 +181,7 @@ function createBtn(classBtn, contentBtn, handler) {
 	var btn = document.createElement("button");
 	btn.classList.add(...classBtn);
 	btn.innerHTML = contentBtn;
-	btn.addEventListener("click", handler, false);
+	btn.addEventListener("click", handler, {capture:false, once:true});
 
 	return btn;
 }
