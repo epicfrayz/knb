@@ -136,16 +136,18 @@ function levelGameOver() {
 function resultGame() {
 	nowLevel = dataLevels.endGame;
 
-	if (dataGame.value.player == 1 && dataGame.value.bot == 3 ||
-		dataGame.value.player == 2 && dataGame.value.bot == 1 ||
-		dataGame.value.player == 3 && dataGame.value.bot == 2) {
-		dataGame.state.win = dataGame.state.win + 1;
-	} else if ( dataGame.value.player  == dataGame.value.bot ) {
-
-	} else {
-		dataGame.state.over = dataGame.state.over  +1;
+	switch (dataGame.value.player === dataGame.value.bot || `${dataGame.value.player}${dataGame.value.bot}`) {
+		case true :
+			console.log('Heh..... Draw')
+			break;
+		case "13" :
+		case "21" :
+		case "32" :
+			++dataGame.state.win;
+			break;
+		default :
+			++dataGame.state.over;
 	}
-
 
 	setTimeout(function (){
 		levelClear();
@@ -182,7 +184,7 @@ function createBtn(classBtn, contentBtn, handler) {
 	var btn = document.createElement("button");
 	btn.classList.add(...classBtn);
 	btn.innerHTML = contentBtn;
-	btn.addEventListener("click", handler, false);
+	btn.addEventListener("click", handler, {capture:false, once:true});
 
 	return btn;
 }
